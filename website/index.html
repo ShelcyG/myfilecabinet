@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My File Cabinet</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>My File Cabinet</h1>
+    </header>
+
+    <!-- Folder View -->
+    <main id="folderView">
+        <h2>Folders</h2>
+        <div class="folder-list">
+            <button class="folder" onclick="showFiles('bills')">Bills</button>
+            <button class="folder" onclick="showFiles('personal')">Personal Account</button>
+            <button class="folder" onclick="showFiles('lia')">Lia</button>
+            <button class="folder" onclick="showFiles('irene')">Irene</button>
+        </div>
+    </main>
+
+    <!-- File View -->
+    <main id="fileView" style="display:none;">
+        <h2 id="folderTitle"></h2>
+        <div id="fileList"></div>
+        <button onclick="goBack()">Back to Folders</button>
+        <button onclick="openUploadModal()">Upload</button>
+    </main>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeUploadModal()">&times;</span>
+            <h3>Upload Files</h3>
+            <input type="file" id="fileInput" multiple>
+            <p>Or drag and drop files here</p>
+            <button onclick="alert('Files uploaded (placeholder)')">Upload</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 My File Cabinet</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+<script src="js/script.js"></script>
+
