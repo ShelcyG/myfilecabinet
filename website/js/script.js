@@ -47,3 +47,49 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.style.background = "white";
     });
 });
+<script>
+const API_LIST = "https://YOUR_API_GATEWAY_LIST_URL";  // replace with your API Gateway URL for list_expenses_lambda
+const API_UPLOAD = "https://YOUR_API_GATEWAY_UPLOAD_URL";  // replace with your API Gateway URL for upload_expense_lambda
+
+// Fetch existing files and show them
+async function loadExpenses() {
+  const response = await fetch(API_LIST);
+  const data = await response.json();
+
+  const list = document.getElementById("expenses-list");
+  list.innerHTML = ""; // clear previous list
+
+  data.forEach(file => {
+    const li = document.createElement("li");
+    li.textContent = file.FileName; // adjust based on your Lambda output
+    list.appendChild(li);
+  });
+}
+
+// Upload a new file
+async function uploadExpense() {
+  const fileInput = document.getElementById("upload-file");
+  if (!fileInput.files.length) {
+    alert("Select a file to upload!");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(API_UPLOAD, {
+    method: "POST",
+    body: formData
+  });
+
+  const result = await response.json();
+  alert(result.message || "Upload complete");
+
+  // Refresh the file list
+  loadExpenses();
+}
+
+// Load files on page load
+window.onload = loadExpenses;
+</script>
